@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
-const slotSchema = new Schema({
+const slotSchema = new mongoose.Schema({
   startTime: {
     type: String
   },
-  startTime: {
+  endTime: {
     type: String
   },
   appointments: [{

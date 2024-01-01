@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors'
 import bodyParser from 'body-parser';
 import { connectDb } from './config/database.js';
+import { Slot } from './models/slotModel.js';
 
 const app = express();
 
@@ -39,6 +40,14 @@ app.put('/appointments/:id', (req, res) => {
   Slot.findByIdAndUpdate(id, { $push: { appointments: body } }, { new: true }).then((slot) => res.json(slot)).catch((err) => res.json(err))
 })
 
+
+// Get Appointments for Slot
+app.get('/appointments', (req, res) => {
+
+  Slot.find().then((slots) => {
+    res.json(slots)
+  }).catch((err) => res.json(err))
+})
 
 const PORT = 4000
 app.listen(PORT, console.log(`htpp://localhost:${PORT}`))

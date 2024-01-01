@@ -16,6 +16,7 @@ export default function MyTimePicker({ label, setFieldValue, fieldName }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <TimePicker
+        sx={{ width: '100%', mb: '10px' }}
         label={label}
         value={selectedTime}
         onChange={handleTimeChange}

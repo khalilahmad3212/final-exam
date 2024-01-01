@@ -12,21 +12,10 @@ const CreateSlotForm = () => {
   return (
     <Formik
       initialValues={{ startTime: '', endTime: '' }}
-      // validate={values => {
-      //   const errors = {};
-      //   if (!values.email) {
-      //     errors.email = 'Required';
-      //   } else if (
-      //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-      //   ) {
-      //     errors.email = 'Invalid email address';
-      //   }
-      //   return errors;
-      // }}
       onSubmit={(values, { setSubmitting }) => {
         api.post("/slots", values)
-          .then((appointment) => {
-            console.log('Res: ', appointment);
+          .then(({ data }) => {
+            console.log('Res: ', data);
             setSubmitting(false);
             navigate("/slots")
           }).catch((err) => {
@@ -47,13 +36,6 @@ const CreateSlotForm = () => {
         /* and other goodies */
       }) => (
         <form onSubmit={handleSubmit}>
-          {/* <input
-          type="datetime-local"
-          name="email"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.email}
-        /> */}
           <div>
             <MyTimePicker
               label={"Start Time"}
@@ -78,9 +60,11 @@ const CreateSlotForm = () => {
           {/* <button type="submit" disabled={isSubmitting}>
           Submit
         </button> */}
-          <Button variant="contained" type="submit" disabled={isSubmitting}>
-            Create
-          </Button>
+          <div style={{ textAlign: 'end' }}>
+            <Button variant="contained" type="submit" disabled={isSubmitting}>
+              Create
+            </Button>
+          </div>
         </form>
       )}
     </Formik>

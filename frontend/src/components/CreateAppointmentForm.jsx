@@ -5,26 +5,15 @@ import { Button, TextField } from '@mui/material';
 import api from '../utils/api'
 import { useNavigate } from 'react-router-dom';
 
-const CreateAppointmentForm = () => {
+const CreateAppointmentForm = ({ slotId }) => {
 
   const navigate = useNavigate();
 
   return (
     <Formik
       initialValues={{ name: '', email: '' }}
-      // validate={values => {
-      //   const errors = {};
-      //   if (!values.email) {
-      //     errors.email = 'Required';
-      //   } else if (
-      //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-      //   ) {
-      //     errors.email = 'Invalid email address';
-      //   }
-      //   return errors;
-      // }}
       onSubmit={(values, { setSubmitting, resetForm }) => {
-        api.post("/appointments", values)
+        api.put(`/appointments/${slotId}`, values)
           .then((appointment) => {
             console.log('Res: ', appointment);
             setSubmitting(false);
@@ -48,14 +37,9 @@ const CreateAppointmentForm = () => {
         /* and other goodies */
       }) => (
         <form onSubmit={handleSubmit}>
-          {/* <input
-          type="datetime-local"
-          name="email"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.email}
-        /> */}
           <TextField
+            fullWidth
+            sx={{ mb: '10px' }}
             id="name"
             label="Name"
             variant="outlined"
@@ -66,6 +50,9 @@ const CreateAppointmentForm = () => {
           />
           <br />
           <TextField
+            fullWidth
+            sx={{ mb: '10px' }}
+
             id="email"
             label="Email"
             variant="outlined"
@@ -75,21 +62,11 @@ const CreateAppointmentForm = () => {
             value={values.email}
           />
           <br />
-          {/* {errors.name && touched.email && errors.email} */}
-          {/* <input
-          type="password"
-          name="password"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.password}
-        /> */}
-          {/* {errors.password && touched.password && errors.password} */}
-          {/* <button type="submit" disabled={isSubmitting}>
-          Submit
-        </button> */}
-          <Button variant="contained" type="submit" disabled={isSubmitting}>
-            Create
-          </Button>
+          <div style={{ textAlign: 'end' }}>
+            <Button variant="contained" type="submit" disabled={isSubmitting}>
+              Create
+            </Button>
+          </div>
         </form>
       )}
     </Formik>
