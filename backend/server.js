@@ -20,6 +20,11 @@ app.post('/slots', (req, res) => {
   Slot.create(body).then((slot) => res.json(slot)).catch((err) => res.json(err))
 })
 
+// Get All Slots
+app.get('/slots', (req, res) => {
+  Slot.find().then((slots) => res.json(slots)).catch((err) => res.json(err))
+})
+
 
 const PORT = 4000
 app.listen(PORT, console.log(`htpp://localhost:${PORT}`))
