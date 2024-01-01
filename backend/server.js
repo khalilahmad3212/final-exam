@@ -31,5 +31,14 @@ app.get('/slots/:id', (req, res) => {
 })
 
 
+// Update Appointments for Slot
+app.put('/appointments/:id', (req, res) => {
+  const body = req.body
+  const id = req.params.id
+
+  Slot.findByIdAndUpdate(id, { $push: { appointments: body } }, { new: true }).then((slot) => res.json(slot)).catch((err) => res.json(err))
+})
+
+
 const PORT = 4000
 app.listen(PORT, console.log(`htpp://localhost:${PORT}`))
