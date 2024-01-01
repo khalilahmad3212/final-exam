@@ -1,8 +1,13 @@
 import React from 'react'
+import CreateAppointmentForm from './CreateAppointmentForm'
 
 const CreateAppointment = () => {
   return (
-    <div>CreateAppointment</div>
+    <div>
+      <h1>CreateAppointment</h1>
+      <CreateAppointmentForm />
+    </div>
+
   )
 }
 
