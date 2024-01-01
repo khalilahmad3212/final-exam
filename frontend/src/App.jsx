@@ -10,7 +10,7 @@ function App() {
     <Routes>
       <Route path="/appointments" element={<ListAppointments />} />
       <Route path="/appointment/new" element={<CreateAppointment />} />
-      <Route path="/availableslots" element={<ListSlots />} />
+      <Route path="/slots" element={<ListSlots />} />
       <Route path="/slot/create" element={<CreateSlot />} />
     </Routes>
   )
