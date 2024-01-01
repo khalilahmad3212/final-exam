@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import api from '../utils/api';
+import { useNavigate } from 'react-router-dom';
 
 const ListSlots = () => {
 
+  const navigate = useNavigate();
   const [slots, setSlots] = useState([]);
 
   const getSlots = () => {
@@ -11,7 +13,6 @@ const ListSlots = () => {
         console.log('Res: ', data);
         setSlots(data);
       }).catch((err) => {
-        setSubmitting(false);
         console.log(err)
       })
   }
@@ -25,11 +26,12 @@ const ListSlots = () => {
       <h1>Booked Appointments</h1>
       <div>
         {
-          slots?.map((appointment) => (
-            <div key={appointment._id}>
-              <h3>{appointment.name}</h3>
-              <h3>{appointment.email}</h3>
-              <p>{appointment.slot.startTime + appointment.slot.startTime} </p>
+          slots?.map((slot) => (
+            <div key={slot._id}>
+              <p>{slot.slot.startTime + slot.slot.startTime} </p>
+              <Button variant="contained" onClick={() => navigate('/appointment/new')}>
+                Book
+              </Button>
             </div>
           ))
         }
