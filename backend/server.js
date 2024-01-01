@@ -25,6 +25,11 @@ app.get('/slots', (req, res) => {
   Slot.find().then((slots) => res.json(slots)).catch((err) => res.json(err))
 })
 
+// Get Specific Slot
+app.get('/slots/:id', (req, res) => {
+  Slot.findById(req.params.id).then((slot) => res.json(slot)).catch((err) => res.json(err))
+})
+
 
 const PORT = 4000
 app.listen(PORT, console.log(`htpp://localhost:${PORT}`))
